@@ -55,8 +55,6 @@ namespace _10WebTask
         private IWebElement DiscountAmount;
         [FindsBy(How = How.XPath, Using = "//div[@class = 'db-checkout__promo-code db-checkout__coupon-code-form coupon_div show']//p[1]")]
         private IWebElement PromoCode;
-        [FindsBy(How = How.XPath, Using = "//a[@class = 'sl-add-website-button db-button db-button_info db-button_lg ng-star-inserted']")]
-        private IWebElement AddWebsiteButton;
 
 
         public HomePage(IWebDriver driver)
@@ -65,8 +63,11 @@ namespace _10WebTask
             PageFactory.InitElements(driver, this);
         }
 
-        public void FillAccountInfo(string firstName, string lastName, string email, string password)
+        public void FillAccountInfo(string firstName, string lastName, string password)
         {
+            Random randomGenerator = new Random();
+            int randomInt = randomGenerator.Next(1000);
+            string email = "Test" + randomInt.ToString() + "@mail.ru";
             FirstName.Clear();
             FirstName.SendKeys(firstName);
             LastName.Clear();
@@ -135,11 +136,6 @@ namespace _10WebTask
         public bool InvalidCardNumberVerification(string message)
         {
             return AccountErrorMessage.Displayed && AccountErrorMessage.Text == message;
-        }
-
-        public bool ValidCardNumberVerification()
-        {
-            return WebDriver.Title == "Websites - Dashboard" && AddWebsiteButton.Displayed;
         }
 
         public void FillInvalidCouponCode()

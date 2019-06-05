@@ -9,10 +9,10 @@ namespace _10WebTask
 {
     public class Tests : BaseTest
     {
-        [TestCase("Test", "Test", "Test@mail.ru", "Testtest", "1220", "777", "Your card has insufficient funds.", TestName = "INVALID CHECKOUT CASE")]
-        public void InvalidChekOut(string firstName, string lastName, string email, string password, string expDate, string cvc, string message)
+        [TestCase("Test", "Test", "Testtest", "1220", "777", "Your card has insufficient funds.", TestName = "INVALID CHECKOUT CASE")]
+        public void InvalidChekOut(string firstName, string lastName, string password, string expDate, string cvc, string message)
         {
-            HomePage.FillAccountInfo(firstName, lastName, email, password);
+            HomePage.FillAccountInfo(firstName, lastName, password);
             HomePage.FillInvalidCardNumber();
             HomePage.FillExpirationDate(expDate);
             HomePage.FillCvc(cvc);
@@ -35,16 +35,16 @@ namespace _10WebTask
             Assert.IsTrue(HomePage.ValidCouponVerification());
         }
 
-        [TestCase("Test", "Test", "Test@mail.ru", "Testtest", "1220", "777", TestName = "VALID CHECKOUT CASE")]
-        public void ValidChekOut(string firstName, string lastName, string email, string password, string expDate, string cvc)
+        [TestCase("Test", "Test", "Testtest", "1220", "777", TestName = "VALID CHECKOUT CASE")]
+        public void ValidChekOut(string firstName, string lastName, string password, string expDate, string cvc)
         {
-            HomePage.FillAccountInfo(firstName, lastName, email, password);
+            HomePage.FillAccountInfo(firstName, lastName, password);
             HomePage.FillValidCardNumber();
             HomePage.FillExpirationDate(expDate);
             HomePage.FillCvc(cvc);
             HomePage.CheckCheckBox();
             HomePage.ClickOnCheckOutButton();
-            Assert.IsTrue(HomePage.ValidCardNumberVerification());
+            Assert.IsTrue(WebSitesPage.ValidCardNumberVerification());
         }
     }
 }

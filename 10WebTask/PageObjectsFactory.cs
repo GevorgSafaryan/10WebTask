@@ -15,5 +15,13 @@ namespace _10WebTask
                 return new HomePage(WebDriver);
             }
         }
+
+        public WebSitesPage WebSitesPage
+        {
+            get
+            {
+                return new WebSitesPage(WebDriver);
+            }
+        }
     }
 }
